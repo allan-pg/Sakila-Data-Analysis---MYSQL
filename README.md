@@ -18,7 +18,7 @@ MYSQL workbench
 ```sql
 SELECT *
 FROM (
-		SELECT *
+	SELECT *
         FROM film 
                 ) x
 WHERE x.rating = 'PG-13' AND x.rental_rate <= 2.99;
@@ -53,17 +53,17 @@ WHERE r.rental_date like '2005-07-26%';
 6. How many rentals we do on each day?
 ```sql
 select 
-			date(rental_date),
-			count(rental_id) as num_of_rentals
+	date(rental_date),
+	count(rental_id) as num_of_rentals
 	from rental
 	group by date(rental_date)
 	order by num_of_rentals desc;
 ```
 7. All Sci-fi films in our catalogue
 ```sql
-SELECT f.film_id,
-			f.title,
-            f.release_year
+SELECT  f.film_id,
+	f.title,
+        f.release_year
 	FROM film f
 	INNER JOIN film_category fc USING(film_id)
 	INNER JOIN category c USING(category_id)
@@ -116,6 +116,11 @@ SELECT count(last_name) as num_of_customer
 			SELECT DISTINCT(last_name)
 			FROM customer);
 ```
+Yields
+```
+num_of_customer
+599
+```
 12. How much money and rentals we make for Store 1 by day?
 ```sql
 select date(payment_date) as date,
@@ -123,6 +128,15 @@ select date(payment_date) as date,
 			sum(amount) as money
 FROM  payment
 GROUP BY date(payment_date);
+```
+Yields  
+```
+Date		num_rentals	money
+2005-05-25	137		573.63
+2005-05-28	196		804.04
+2005-06-15	348		1376.52
+2005-06-16	324		1349.76
+2005-06-18	344		1486.56
 ```
 13. What are the three top earning days so far?
 ```sql
@@ -133,6 +147,13 @@ FROM  payment
 GROUP BY date(payment_date)
 ORDER BY sum(amount) desc
 limit 3;
+```
+Yields  
+```
+date	    num_of_rentals	money	 
+2005-07-31	679		2868.21
+2005-07-30	634		2840.66
+2005-08-01	671		2817.29
 ```
 14. number of movies acted by each actor
 ```sql
@@ -151,18 +172,33 @@ FROM (
 SELECT *
 FROM cte;
 ```
+Yields  
+```
+actor_id name		num_movies
+107	GINA DEGENERES	42
+102	WALTER TORN	41
+198	MARY KEITEL	40
+181	MATTHEW CARREY	39
+```
 15. Countries with highest number of customers (top 3)
 ```sql
 SELECT *
 FROM (
 	SELECT c.country,
-			count(cm.customer_id) as num_customer
+		count(cm.customer_id) as num_customer
 	from country c
 	inner join city ct USING(country_id)
 	inner join address a USING(city_id)
 	INNER JOIN customer cm USING(address_id)
 	 GROUP BY c.country
      ORDER BY num_customer desc) as x;
+```
+Yield  
+```
+country		num_customer
+India		60
+China		53
+United States	36
 ```
 16. Store that made the highest number of sales and by how much
 ```sql
@@ -179,5 +215,11 @@ WITH cte AS (
  )
  SELECT *
  FROM cte;
+```
+Yields
+```
+store_id	amount
+2		33924.06
+1		33482.50
 ```
 
