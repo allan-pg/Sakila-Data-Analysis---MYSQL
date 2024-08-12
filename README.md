@@ -15,7 +15,7 @@ MYSQL workbench
 
 ## Questions
 1. All films with PG-13 films with rental rate of 2.99 or lower
-```
+```sql
 SELECT *
 FROM (
 		SELECT *
