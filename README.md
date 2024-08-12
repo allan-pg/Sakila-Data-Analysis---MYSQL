@@ -24,34 +24,34 @@ FROM (
 WHERE x.rating = 'PG-13' AND x.rental_rate <= 2.99;
 ```
 2. All films that have deleted scenes
-```
+```sql
 SELECT *
 FROM film f 
 WHERE f.special_features like '%Deleted Scenes%';
 
 ```
 3. All active customers
-```
+```sql
 SELECT *
 FROM customer c 
 WHERE c.active = 1;
 ```
 4. Names of customers who rented a movie on 26th July 2005
-```
+```sql
 SELECT concat(c.first_name, ' ', c.last_name) as full_name
 FROM customer c
 inner join rental r USING(customer_id)
 WHERE r.rental_date like '2005-07-26%';
 ```
 5. Distinct names of customers who rented a movie on 26th July 2005
-```
+```sql
 SELECT DISTINCT(concat(c.first_name, ' ', c.last_name)) as full_name
 FROM customer c
 inner join rental r USING(customer_id)
 WHERE r.rental_date like '2005-07-26%';
 ```
 6. How many rentals we do on each day?
-```
+```sql
 select 
 			date(rental_date),
 			count(rental_id) as num_of_rentals
@@ -60,7 +60,7 @@ select
 	order by num_of_rentals desc;
 ```
 7. All Sci-fi films in our catalogue
-```
+```sql
 SELECT f.film_id,
 			f.title,
             f.release_year
@@ -70,7 +70,7 @@ SELECT f.film_id,
     WHERE name = 'Sci-fi';
 ```
 8. Customers and how many movies they rented from us so far?
-```
+```sql
 WITH CTE as (
 	SELECT *
 	FROM (
@@ -86,7 +86,7 @@ WITH CTE as (
 select * from CTE; 
 ```
 9. Which movies should we discontinue from our catalogue (less than 2 lifetime rentals)
-```
+```sql
 select  f.film_id,
         f.title,
         i.inventory_id,
@@ -98,7 +98,7 @@ group by i.inventory_id
 HAVING count(*) < 2;
 ```
 10. Which movies are not returned yet?
-```
+```sql
 SELECT *
 FROM (
 	SELECT f.film_id,
@@ -109,7 +109,7 @@ FROM (
 	WHERE return_date is null and rental_date is not null) AS x;
 ```
 11. How many distinct last names we have in the data?
-```
+```sql
 SELECT count(last_name) as num_of_customer
 	from customer 
 	WHERE last_name in (
@@ -117,7 +117,7 @@ SELECT count(last_name) as num_of_customer
 			FROM customer);
 ```
 12. How much money and rentals we make for Store 1 by day?
-```
+```sql
 select date(payment_date) as date,
 			count(rental_id) as num_of_rentals,
 			sum(amount) as money
@@ -125,7 +125,7 @@ FROM  payment
 GROUP BY date(payment_date);
 ```
 13. What are the three top earning days so far?
-```
+```sql
 select date(payment_date) as date,
 			count(rental_id) as num_of_rentals,
 			sum(amount) as money
@@ -135,7 +135,7 @@ ORDER BY sum(amount) desc
 limit 3;
 ```
 14. number of movies acted by each actor
-```
+```sql
 WITH cte AS (
 SELECT * 
 FROM (
@@ -152,7 +152,7 @@ SELECT *
 FROM cte;
 ```
 15. Countries with highest number of customers (top 3)
-```
+```sql
 SELECT *
 FROM (
 	SELECT c.country,
@@ -165,7 +165,7 @@ FROM (
      ORDER BY num_customer desc) as x;
 ```
 16. Store that made the highest number of sales and by how much
-```
+```sql
 WITH cte AS (
 	select *
 	FROM (
@@ -180,4 +180,4 @@ WITH cte AS (
  SELECT *
  FROM cte;
 ```
-# Conclusion
+
