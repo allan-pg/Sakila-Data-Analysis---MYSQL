@@ -223,3 +223,5 @@ store_id	amount
 1		33482.50
 ```
 
+## Conclusion
+With this analysis of the data we are now aware of which type of movies to keep in stock, active customers to keep and can also further create a predictive model to predict the sales of film but for that, we need some more data.
