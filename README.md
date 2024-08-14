@@ -5,7 +5,7 @@
 Structured Query Language(SQL), is the lingua franca of data analysts.   
 This powerful language allows us to extract, manipulate, and analyze data from various databases, enabling us to uncover valuable insights that drive informed decision-making. 
 Analysed Sakila Database in MYSQL workbench
-## Sakila Database 
+## Sakila Database Schema
 One of the best example databases out there is the Sakila Database, which was originally created by MySQL and has been open sourced 
 
 ![image](https://github.com/user-attachments/assets/fbc8d60d-0cda-4a58-a4d3-6fcfe7dac70d)
@@ -13,6 +13,14 @@ One of the best example databases out there is the Sakila Database, which was or
 ## Tools
 MYSQL workbench
 
+## Objectives
+The main objectives of this project are:
+
+1. To retrieve specific data from the Sakila database based on given criteria.
+2. To optimize SQL queries for better performance and utilisation of  resources.
+3. To provide insights and reports based on the extracted data.
+
+# Exploratory Data Analysis
 ## Questions
 1. All films with PG-13 films with rental rate of 2.99 or lower
 ```sql
